@@ -1,0 +1,50 @@
+wx:
+  miniapp:
+    appid: 'xxxx'
+    secret: 'xxxxx'
+    token: ''
+    aesKey: ''
+    msgDataFormat: JSON
+spring:
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+  jackson:
+    date-format: yyyy-MM-dd #如果使用字符串表示，用这行设置格式
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: true
+  profiles:
+    active: dev
+  datasource:
+    druid:
+      username: xxxx
+      password: xxxxxxxx
+      url: jdbc:mysql://bj-cynosdbmysql-grp-5mt65oak.sql.tencentcdb.com:21485/emall?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    banner-mode: off
+    # Spring Boot 2.1 需要设定
+#    allow-bean-definition-overriding: true
+#    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis-plus:
+  # 该方式可以访问导入jar包中的类路径 classpath*:
+  mapper-locations: classpath*:/mapperxml/*.xml
+  global-config:
+    banner: off
+    db-config:
+      # 全局设置主键生成策略(默认为ID_WORKER)
+      # 分布式系统唯一ID生成方案汇总：https://www.cnblogs.com/haoxinyue/p/5208136.html
+      id-type: auto
+  configuration:
+    cache-enabled: false
+#dubbo:
+#  registry:
+#    # 挂载到 Spring Cloud 注册中心
+#    address: nacos://localhost:8848
+#  cloud:
+#    subscribed-services: emall-task

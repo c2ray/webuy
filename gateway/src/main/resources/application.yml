@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    # 解决和spring-boot-web-starter的冲突
+    web-application-type: reactive

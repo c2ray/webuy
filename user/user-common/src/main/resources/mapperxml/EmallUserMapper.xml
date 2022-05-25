@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbh.emall.user.common.mapper.EmallUserMapper">
+	<resultMap id="BaseResultMap" type="com.wbh.emall.user.common.entity.EmallUser">
+		<!--@mbg.generated-->
+		<!--@Table emall_user-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="openid" jdbcType="VARCHAR" property="openid"/>
+		<result column="unionid" jdbcType="VARCHAR" property="unionid"/>
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+		<result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+		<result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl"/>
+		<result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+		<result column="username" jdbcType="VARCHAR" property="username"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, openid, unionid, gmt_create, gmt_update, avatar_url, nick_name,phone,username,password
+	</sql>
+
+	<select id="selectByOpenId" parameterType="string" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from emall_user
+		where openid = #{openId,jdbcType=VARCHAR}
+	</select>
+</mapper>

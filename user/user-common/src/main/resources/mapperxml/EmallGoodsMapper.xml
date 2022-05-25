@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbh.emall.user.common.mapper.EmallGoodsMapper">
+	<resultMap id="BaseResultMap" type="com.wbh.emall.user.common.entity.vo.EmallGoodsVo">
+		<!--@mbg.generated-->
+		<!--@Table emall_goods-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+		<result column="desc" jdbcType="LONGVARCHAR" property="desc"/>
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+		<result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+		<result column="price" jdbcType="DOUBLE" property="price"/>
+		<result column="original_price" jdbcType="DOUBLE" property="originalPrice"/>
+		<result column="type_id" jdbcType="INTEGER" property="typeId"/>
+		<result column="u_id" jdbcType="INTEGER" property="uId"/>
+		<result column="unit_id" jdbcType="INTEGER" property="unitId"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, `name`, `desc`, gmt_create, gmt_update, price, original_price, type_id,
+		u_id,unit_id
+	</sql>
+
+	<!-- 根据商品类型获取商品封面 -->
+	<select id="selectGoodsCoverByType" resultType="com.wbh.emall.user.common.entity.vo.EmallGoodsVo"
+	        parameterType="int">
+		SELECT g.id             AS id,
+		       g.name           AS name,
+		       g.price          AS price,
+		       g.original_price AS originalprice,
+		       g.type_id        AS typeid,
+		       g.u_id           AS uid,
+		       g.unit_id        as unitId,
+		       gc.url           as coverUrl
+		FROM emall_goods g,
+		     emall_goods_type gt,
+		     emall_goods_cover gc
+		WHERE gt.id = #{typeId}
+		  AND g.type_id = gt.id
+		  AND gc.id = g.cover_id
+	</select>
+
+	<select id="selectGoodsByPage" resultType="com.wbh.emall.user.common.entity.vo.EmallGoodsVo">
+		SELECT g.id             AS id,
+		       g.name           AS name,
+		       g.price          AS price,
+		       g.desc           AS `desc`,
+		       g.type_id        AS `typeId`,
+		       g.unit_id        AS `unitId`,
+		       g.original_price AS original_price,
+		       g.gmt_create     AS gmt_create,
+		       g.cover_id       AS cover_id
+		FROM emall_goods g
+		WHERE g.u_id = #{uId}
+	</select>
+
+	<select id="selectSimpleGoodsById" resultType="com.wbh.emall.user.common.entity.vo.EmallGoodsVo"
+	        parameterType="int">
+		SELECT g.id    AS id,
+		       g.name  AS name,
+		       g.price AS price,
+		       gu.name as unitName,
+		       gc.url  as coverUrl
+		FROM emall_goods g,
+		     emall_goods_unit gu,
+		     emall_goods_cover gc
+		WHERE g.id = #{goodsId}
+		  AND g.unit_id = gu.id
+		  AND g.cover_id = gc.id
+	</select>
+</mapper>
+
+

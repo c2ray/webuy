@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbh.emall.user.common.mapper.EmallGoodsOrderRelationMapper">
+	<resultMap id="BaseResultMap" type="com.wbh.emall.user.common.entity.EmallGoodsOrderRelation">
+		<!--@mbg.generated-->
+		<!--@Table emall_goods_order_relation-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="order_id" jdbcType="INTEGER" property="orderId"/>
+		<result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+		<result column="goods_number" jdbcType="INTEGER" property="goodsNumber"/>
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+		<result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, order_id, goods_id, goods_number,gmt_create,gmt_update
+	</sql>
+	<select id="selectByOrderId" resultType="com.wbh.emall.user.common.entity.EmallGoodsOrderRelation">
+		SELECT goods_id, goods_number, id
+		from emall_goods_order_relation
+		WHERE order_id = #{orderId}
+	</select>
+</mapper>

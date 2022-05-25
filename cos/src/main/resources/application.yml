@@ -1,0 +1,18 @@
+tx:
+  cos:
+    appid: xxxxxxx
+    secretId: xxxxxxxxx
+    secretKey: xxxxxxxxxxx
+    region: ap-beijing
+    bucket-name: emall-1258606498
+    endpoint: cos.ap-beijing.myqcloud.com
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    banner-mode: off
+    allow-circular-references: true
+  profiles:
+    active: dev

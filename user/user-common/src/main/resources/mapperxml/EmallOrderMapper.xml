@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbh.emall.user.common.mapper.EmallOrderMapper">
+	<resultMap id="BaseResultMap" type="com.wbh.emall.user.common.entity.EmallOrder">
+		<!--@mbg.generated-->
+		<!--@Table emall_order-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="custom_id" jdbcType="INTEGER" property="customId"/>
+		<result column="total_amount" jdbcType="DOUBLE" property="totalAmount"/>
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+		<result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+		<result column="pay_status" jdbcType="INTEGER" property="payStatus"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, custom_id, total_amount,gmt_create,gmt_update,pay_status
+	</sql>
+	<!-- 通过用户的id获取他的订单信息 -->
+	<select id="selectOrderByUserId" resultType="com.wbh.emall.user.common.entity.EmallOrder">
+		SELECT id, total_amount, gmt_create, pay_status
+		FROM emall_order
+		WHERE custom_id = #{uid}
+	</select>
+
+	<!-- 这个sql有待优化 -->
+	<!-- 通过商家的id获取他客户的订单信息 -->
+	<select id="selectOrderByPage" resultType="com.wbh.emall.user.common.entity.vo.EmalEUserOrderVo">
+		SELECT gor.id AS    id,
+		       g.name       goods_name,
+		       g.price      goods_price,
+		       goods_number,
+		       o.gmt_create create_time,
+		       u.nick_name  user_name,
+		       pay_status
+		FROM emall_order o,
+		     emall_goods_order_relation gor,
+		     emall_goods g,
+		     emall_user u
+		WHERE g.u_id = #{uid}
+		  AND o.id = gor.order_id
+		  AND g.id = gor.goods_id
+		  AND gor.goods_id = g.id
+		  AND o.custom_id = u.id
+	</select>
+</mapper>

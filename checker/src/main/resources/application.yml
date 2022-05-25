@@ -1,0 +1,11 @@
+wx:
+  miniapp:
+    appid: 'xxxxxx'
+    secret: 'xxxxxxxxxx'
+    token: ''
+    aesKey: ''
+    msgDataFormat: JSON
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

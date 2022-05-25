@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wbh.emall.user.common.mapper.EmallGoodsPicMapper">
+	<resultMap id="BaseResultMap" type="com.wbh.emall.user.common.entity.EmallGoodsPic">
+		<!--@mbg.generated-->
+		<!--@Table emall_goods_pic-->
+		<id column="id" jdbcType="INTEGER" property="id"/>
+		<result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+		<result column="url" jdbcType="VARCHAR" property="url"/>
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+		<result column="gmt_update" jdbcType="INTEGER" property="gmtUpdate"/>
+		<result column="legal" jdbcType="INTEGER" property="legal"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		id, goods_id, url, gmt_create, gmt_update,legal
+	</sql>
+
+	<!-- 通过商品id获取图片列表 -->
+	<select id="selectPicListByGid" resultType="com.wbh.emall.user.common.entity.vo.EmallGoodsPicVo">
+		SELECT id, url, goods_id,legal
+		FROM emall_goods_pic
+		WHERE goods_id = #{gid}
+	</select>
+</mapper>

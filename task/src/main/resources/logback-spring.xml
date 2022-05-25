@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false" xmlns="http://ch.qos.logback/xml/ns/logback"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback
+               https://raw.githubusercontent.com/fymenglovewxliu/logback-XSD/master/src/main/xsd/logback.xsd">
+
+	<property name="LOG_PATTERN" value="[%d{HH:mm:ss.SSS}] [%thread] %-5level [%logger{36}:%line] -> %msg%n"/>
+
+	<!-- 定义日志存储的路径，不要配置相对路径 -->
+	<!--<property name="FILE_PATH" value="/www/wwwroot/lw.uom.cn/log/paper-checker-log.%d{yyyy-MM-dd}.%i.log"/>-->
+	<!--<property name="FILE_PATH" value="/www/wwwroot/check.uom.cn/log/document-check-log.%d{yyyy-MM-dd}.%i.log"/>-->
+
+	<!--Put your configurations on here-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type
+		ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<!-- 日志级别过滤INFO以下 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>debug</level>
+		</filter>
+	</appender>
+
+	<!--&lt;!&ndash;每天生成一个日志文件，保存30天的日志文件。rollingFile用来切分文件的 &ndash;&gt;-->
+	<!--<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+	<!--	&lt;!&ndash; 日志级别过滤ERROR以下 &ndash;&gt;-->
+	<!--	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+	<!--		<level>ERROR</level>-->
+	<!--	</filter>-->
+	<!--	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+	<!--		<fileNamePattern>${FILE_PATH}</fileNamePattern>-->
+	<!--		&lt;!&ndash; keep 15 days' worth of history &ndash;&gt;-->
+	<!--		<maxHistory>30</maxHistory>-->
+	<!--		<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+	<!--			&lt;!&ndash; 日志文件的最大大小 &ndash;&gt;-->
+	<!--			<maxFileSize>2MB</maxFileSize>-->
+	<!--		</timeBasedFileNamingAndTriggeringPolicy>-->
+	<!--		&lt;!&ndash; 超出删除老文件 &ndash;&gt;-->
+	<!--		<totalSizeCap>1GB</totalSizeCap>-->
+	<!--	</rollingPolicy>-->
+	<!--	<encoder>-->
+	<!--		<pattern>${LOG_PATTERN}</pattern>-->
+	<!--	</encoder>-->
+	<!--</appender>-->
+
+	<!--自定义日志-->
+	<!--<logger name="com.wbh.emall.api.mapper" level="debug"/>-->
+	<!-- 这里指定特定包的日志级别 -->
+	<logger name="com.wbh.emall" level="info"/>
+	<logger name="org.springframework.web" level="debug"/>
+	<root level="info">
+		<appender-ref ref="STDOUT"/>
+	</root>
+
+	<!--<springProfile name="dev">-->
+	<!--	&lt;!&ndash; 这里会配置全局的日志输出 &ndash;&gt;-->
+	<!--	<root level="debug">-->
+	<!--		<appender-ref ref="STDOUT"/>-->
+	<!--	</root>-->
+	<!--</springProfile>-->
+
+	<!--<springProfile name="dev">-->
+	<!--	&lt;!&ndash; 这里会配置全局的日志输出 &ndash;&gt;-->
+	<!--	<root level="debug">-->
+	<!--		<appender-ref ref="STDOUT"/>-->
+	<!--	</root>-->
+	<!--</springProfile>-->
+
+	<!--<springProfile name="prod">-->
+	<!--	<root level="error">-->
+	<!--		<appender-ref ref="rollingFile"/>-->
+	<!--	</root>-->
+	<!--</springProfile>-->
+
+</configuration>
