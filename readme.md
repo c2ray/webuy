@@ -1,4 +1,4 @@
-# EMall 笔记
+# WeBuy 笔记
 ## Nacos指定ip地址
 
 ![image-20220503233306883](assets/readme/image-20220503233306883.png)
